@@ -9,7 +9,7 @@ const repoName = process.env.REPO_NAME || 'pdfjs-react-viewer'
 export default defineConfig({
   plugins: [react()],
   // Set base path for GitHub Pages deployment
-  base: process.env.NODE_ENV === 'production' ? `/${repoName}/` : '/',
+  base: `/${repoName}/`,
   build: {
     outDir: 'demo-dist',
     sourcemap: true,
