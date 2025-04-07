@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   splitting: false,
-  sourcemap: true,
+  sourcemap: false,
   clean: true,
   target: 'esnext',
   tsconfig: './tsconfig.build.json', // Or './tsconfig.json'
