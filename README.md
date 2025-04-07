@@ -1,7 +1,7 @@
 # PDF.js Viewer React
 
-[![npm version](https://img.shields.io/npm/v/pdfjs-viewer-react.svg)](https://www.npmjs.com/package/pdfjs-viewer-react)
-[![npm downloads](https://img.shields.io/npm/dm/pdfjs-viewer-react.svg)](https://www.npmjs.com/package/pdfjs-viewer-react)
+[![npm version](https://img.shields.io/npm/v/pdfjs-react-viewer.svg)](https://www.npmjs.com/package/pdfjs-react-viewer)
+[![npm downloads](https://img.shields.io/npm/dm/pdfjs-react-viewer.svg)](https://www.npmjs.com/package/pdfjs-react-viewer)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A lightweight, customizable PDF viewer component for React applications. Built on top of Mozilla's PDF.js, this library makes it easy to integrate PDF viewing capabilities into your React projects.
@@ -17,14 +17,14 @@ A lightweight, customizable PDF viewer component for React applications. Built o
 
 ## 🔥 Live Demo
 
-Check out our [live demo](https://example.com/pdfjs-viewer-react-demo) to see the component in action!
+Check out our [live demo](https://example.com/pdfjs-react-viewer-demo) to see the component in action!
 
 ## 📦 Installation
 
 ```bash
-npm install pdfjs-viewer-react
+npm install pdfjs-react-viewer
 # or
-yarn add pdfjs-viewer-react
+yarn add pdfjs-react-viewer
 ```
 
 ## 🔧 Compatibility
@@ -49,7 +49,7 @@ This library has been tested and works well with:
 ## 💻 Basic Usage
 
 ```jsx
-import { PDFJSViewer } from 'pdfjs-viewer-react';
+import { PDFJSViewer } from 'pdfjs-react-viewer';
 
 function App() {
   return (
@@ -67,7 +67,7 @@ function App() {
 
 ```jsx
 import { useState } from 'react';
-import { PDFJSViewer } from 'pdfjs-viewer-react';
+import { PDFJSViewer } from 'pdfjs-react-viewer';
 
 function App() {
   const [scale, setScale] = useState(1.5);
@@ -100,7 +100,7 @@ cd my-pdf-app
 
 # Install dependencies
 npm install
-npm install pdfjs-viewer-react
+npm install pdfjs-react-viewer
 
 # Start the development server
 npm run dev
@@ -109,7 +109,7 @@ npm run dev
 Then edit your `src/App.tsx` to include the PDF viewer:
 
 ```tsx
-import { PDFJSViewer } from 'pdfjs-viewer-react';
+import { PDFJSViewer } from 'pdfjs-react-viewer';
 import './App.css';
 
 function App() {
@@ -136,7 +136,7 @@ export default App;
 The main component for rendering PDFs.
 
 ```jsx
-import { PDFJSViewer } from 'pdfjs-viewer-react';
+import { PDFJSViewer } from 'pdfjs-react-viewer';
 ```
 
 #### Props
@@ -154,7 +154,7 @@ import { PDFJSViewer } from 'pdfjs-viewer-react';
 Navigation controls component that can be used separately or customized.
 
 ```jsx
-import { PDFControls } from 'pdfjs-viewer-react';
+import { PDFControls } from 'pdfjs-react-viewer';
 ```
 
 #### Props
@@ -175,7 +175,7 @@ You can create custom navigation controls by providing a function to the `render
 ### Example of Custom Controls
 
 ```jsx
-import { PDFJSViewer, PDFControlsProps } from 'pdfjs-viewer-react';
+import { PDFJSViewer, PDFControlsProps } from 'pdfjs-react-viewer';
 
 // Custom controls component
 const CustomControls = (props: PDFControlsProps) => {
@@ -234,7 +234,7 @@ import type {
   PDFRenderContext,
   PDFRenderTask,
   PDFJSLib
-} from 'pdfjs-viewer-react';
+} from 'pdfjs-react-viewer';
 ```
 
 ## Development
