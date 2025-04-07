@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 
 // Get repository name from package.json or environment
-const repoName = process.env.REPO_NAME || 'pdfjs-react-viewer'
+const repoName = process.env.REPO_NAME || 'pdfjs-viewer-react'
 
 // Configuration for building the demo application
 export default defineConfig({
