@@ -1,5 +1,5 @@
 {
-  "name": "pdfjs-viewer-react",
+  "name": "pdfjs-react-viewer",
   "version": "0.1.0-14",
   "description": "A React component library for viewing PDFs using PDF.js",
   "type": "module",
