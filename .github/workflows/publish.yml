@@ -109,10 +109,10 @@ jobs:
         run: yarn build:demo
 
       # Deploy demo to GitHub Pages
-      - name: Deploy demo to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./demo-dist
           publish_branch: gh-pages
           keep_files: false
