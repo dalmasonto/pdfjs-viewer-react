@@ -6,6 +6,21 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "author": "dalmasonto <dalmasogembo@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dalmasonto/pdfjs-viewer-react/"
+  },
+  "homepage": "https://dalmasonto.github.io/pdfjs-viewer-react/",
+  "keywords": [
+    "pdf",
+    "pdfjs",
+    "react",
+    "viewer",
+    "pdf-viewer",
+    "document-viewer"
+  ],
   "files": [
     "dist",
     "dist/types"
