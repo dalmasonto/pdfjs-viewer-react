@@ -17,7 +17,7 @@ A lightweight, customizable PDF viewer component for React applications. Built o
 
 ## 🔥 Live Demo
 
-Check out our [live demo](https://example.com/pdfjs-react-viewer-demo) to see the component in action!
+Check out our [live demo](https://dalmasonto.github.io/pdfjs-viewer-react/) to see the component in action!
 
 ## 📦 Installation
 
