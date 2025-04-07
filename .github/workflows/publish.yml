@@ -92,23 +92,30 @@ jobs:
     # if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-        
-      - name: Setup Node.js
+
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'yarn'
-          
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-        
-      # Build demo app
-      - name: Build demo app
-        run: yarn build:demo
+          node-version: 20
+          cache: 'npm'
 
-      # Deploy demo to GitHub Pages
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build:demo
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload dist folder
+          path: './demo-dist'
+
       - name: Deploy demo to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
