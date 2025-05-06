@@ -148,6 +148,9 @@ import { PDFJSViewer } from 'pdfjs-react-viewer';
 | `renderControls` | `function` | Default controls | Custom renderer for navigation controls |
 | `className` | `string` | `''` | CSS class name for the container |
 | `workerSrc` | `string` | Mozilla CDN | Worker source URL |
+| `onPageChange` | `function` | - | Callback fired when the page changes |
+| `onDocumentLoad` | `function` | - | Callback fired when the PDF document is loaded |
+| `viewerRef` | `React.RefObject<PDFJSViewerAPI>` | - | Ref to access the viewer API methods |
 
 ### PDFControls
 
@@ -220,6 +223,99 @@ function App() {
 }
 ```
 
+## Using Callbacks and the Viewer API
+
+### Page Change Tracking
+
+You can track page changes using the `onPageChange` callback:
+
+```jsx
+import { PDFJSViewer } from 'pdfjs-react-viewer';
+
+function App() {
+  const handlePageChange = (pageNumber, totalPages) => {
+    console.log(`Viewing page ${pageNumber} of ${totalPages}`);
+    // Update UI or state based on page change
+  };
+
+  return (
+    <div className="app">
+      <PDFJSViewer 
+        pdfUrl="https://example.com/sample.pdf" 
+        onPageChange={handlePageChange}
+      />
+    </div>
+  );
+}
+```
+
+### Document Load Events
+
+You can respond to document loading using the `onDocumentLoad` callback:
+
+```jsx
+import { PDFJSViewer } from 'pdfjs-react-viewer';
+
+function App() {
+  const handleDocumentLoad = (totalPages) => {
+    console.log(`PDF loaded with ${totalPages} pages`);
+    // Initialize UI or state based on document load
+  };
+
+  return (
+    <div className="app">
+      <PDFJSViewer 
+        pdfUrl="https://example.com/sample.pdf" 
+        onDocumentLoad={handleDocumentLoad}
+      />
+    </div>
+  );
+}
+```
+
+### Programmatic Control with Viewer API
+
+You can programmatically control the viewer using the `viewerRef`:
+
+```jsx
+import { useRef } from 'react';
+import { PDFJSViewer, PDFJSViewerAPI } from 'pdfjs-react-viewer';
+
+function App() {
+  // Create a ref to access the viewer API
+  const pdfViewerRef = useRef<PDFJSViewerAPI>(null);
+
+  // Function to jump to a specific page
+  const goToPage5 = () => {
+    if (pdfViewerRef.current) {
+      pdfViewerRef.current.goToPage(5);
+    }
+  };
+
+  // Function to get the current page
+  const logCurrentPage = () => {
+    if (pdfViewerRef.current) {
+      const currentPage = pdfViewerRef.current.getCurrentPage();
+      console.log(`Currently on page ${currentPage}`);
+    }
+  };
+
+  return (
+    <div className="app">
+      <div className="controls">
+        <button onClick={goToPage5}>Go to Page 5</button>
+        <button onClick={logCurrentPage}>Log Current Page</button>
+      </div>
+      
+      <PDFJSViewer 
+        pdfUrl="https://example.com/sample.pdf" 
+        viewerRef={pdfViewerRef}
+      />
+    </div>
+  );
+}
+```
+
 ## Types
 
 The library exports TypeScript types for all components and PDF.js interfaces:
@@ -233,7 +329,8 @@ import type {
   PDFViewport,
   PDFRenderContext,
   PDFRenderTask,
-  PDFJSLib
+  PDFJSLib,
+  PDFJSViewerAPI // New API interface
 } from 'pdfjs-react-viewer';
 ```
 

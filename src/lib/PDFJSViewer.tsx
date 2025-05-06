@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useImperativeHandle } from 'react';
 import { 
   PDFJSViewerProps, 
   PDFDocumentProxy,
-  PDFControlsProps
+  PDFControlsProps,
+  PDFJSViewerAPI
 } from './types';
 import { Canvas, PDFContainer } from './styled';
 import PDFControls from './PDFControls';
@@ -16,7 +17,10 @@ const PDFJSViewer: React.FC<PDFJSViewerProps> = ({
   scale = 1.5,
   renderControls,
   className,
-  workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.mjs'
+  workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.mjs',
+  onPageChange,
+  onDocumentLoad,
+  viewerRef
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [pdfDoc, setPdfDoc] = useState<PDFDocumentProxy | null>(null);
@@ -85,6 +89,11 @@ const PDFJSViewer: React.FC<PDFJSViewerProps> = ({
         
         setPdfDoc(doc);
         setPageCount(doc.numPages);
+        
+        // Call onDocumentLoad callback if provided
+        if (onDocumentLoad) {
+          onDocumentLoad(doc.numPages);
+        }
         
         // Render the first page
         renderPage(1, doc);
@@ -155,17 +164,50 @@ const PDFJSViewer: React.FC<PDFJSViewerProps> = ({
   // Go to previous page
   const onPrevPage = () => {
     if (pageNum <= 1) return;
-    setPageNum(pageNum - 1);
-    queueRenderPage(pageNum - 1);
+    const newPageNum = pageNum - 1;
+    setPageNum(newPageNum);
+    queueRenderPage(newPageNum);
+    
+    // Call onPageChange callback if provided
+    if (onPageChange) {
+      onPageChange(newPageNum, pageCount);
+    }
   };
 
   // Go to next page
   const onNextPage = () => {
     if (pageNum >= pageCount) return;
-    setPageNum(pageNum + 1);
-    queueRenderPage(pageNum + 1);
+    const newPageNum = pageNum + 1;
+    setPageNum(newPageNum);
+    queueRenderPage(newPageNum);
+    
+    // Call onPageChange callback if provided
+    if (onPageChange) {
+      onPageChange(newPageNum, pageCount);
+    }
   };
+  
+  // Go to a specific page
+  const goToPage = (num: number) => {
+    if (num < 1 || num > pageCount) return;
+    setPageNum(num);
+    queueRenderPage(num);
+    
+    // Call onPageChange callback if provided
+    if (onPageChange) {
+      onPageChange(num, pageCount);
+    }
+  };
+  
+  // Get current page
+  const getCurrentPage = () => pageNum;
 
+  // Expose API methods via ref
+  useImperativeHandle(viewerRef, (): PDFJSViewerAPI => ({
+    getCurrentPage,
+    goToPage
+  }), [pageNum, pageCount]);
+  
   // Controls props
   const controlsProps: PDFControlsProps = {
     currentPage: pageNum,

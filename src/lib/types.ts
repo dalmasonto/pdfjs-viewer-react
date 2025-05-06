@@ -39,6 +39,22 @@ export interface PDFJSLib {
   };
 }
 
+/**
+ * API methods exposed by the PDFJSViewer component
+ */
+export interface PDFJSViewerAPI {
+  /**
+   * Get the current page number
+   */
+  getCurrentPage: () => number;
+  
+  /**
+   * Go to a specific page
+   * @param pageNumber The page number to navigate to
+   */
+  goToPage: (pageNumber: number) => void;
+}
+
 // Props for the PDFJSViewer component
 export interface PDFJSViewerProps {
   /**
@@ -67,6 +83,25 @@ export interface PDFJSViewerProps {
    * Worker source URL (default: Mozilla CDN)
    */
   workerSrc?: string;
+  
+  /**
+   * Callback fired when the page changes
+   * @param pageNumber The new page number
+   * @param totalPages The total number of pages
+   */
+  onPageChange?: (pageNumber: number, totalPages: number) => void;
+  
+  /**
+   * Callback fired when the PDF document is loaded
+   * @param totalPages The total number of pages in the document
+   */
+  onDocumentLoad?: (totalPages: number) => void;
+  
+  /**
+   * Ref to access the viewer API methods
+   * Use this to programmatically control the viewer
+   */
+  viewerRef?: React.RefObject<PDFJSViewerAPI>;
 }
 
 // Props for the PDF controls component
